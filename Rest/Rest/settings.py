@@ -44,20 +44,28 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    'rest_auth',
+    'allauth',
+    'dj_rest_auth',
 ]
 
-REST_USE_JWT = True
+REST_AUTH = {
+    
+    'USE_JWT': True  , 
+    'JWT_AUTH_HTTPONLY':False,
+    'JWT_AUTH_COOKIE': 'access',
+    'JWT_AUTH_REFRESH_COOKIE': 'refresh',
+}
+SITE_ID = 1
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'shop.permissions.IsStaffOrReadOnly',
-        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES':[
         # 'rest_framework_simplejwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     'rest_framework.authentication.SessionAuthentication',#Ajax
     # 'rest_framework.authentication.BasicAuthentication',#USER:PASS | BASE64 No DB,
@@ -90,7 +98,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-REST_USE_JWT = True
 
 import os
 ROOT_URLCONF = 'Rest.urls'

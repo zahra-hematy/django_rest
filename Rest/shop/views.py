@@ -82,22 +82,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
-# def index(request):
-#     """View function for home page of site."""
-
-#     # Generate counts of some of the main objects
-#     product = Product.objects.all()
-
-#     context = {
-#         'product' : product
-#     }
-#     # Render the HTML template index.html with the data in the context variable
-#     return render(request, 'shop/base.html', context=context)
-
-
-
-
-
 
 class ProductUploadAPIView(CreateAPIView):
     serializer_class = serializers.UploadProductSerializer

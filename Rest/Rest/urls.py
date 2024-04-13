@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from shop.views import CustomTokenObtainPairView
-
+from dj_rest_auth.views import PasswordResetConfirmView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -28,7 +28,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('rest_framework.urls')),
     path('api/', include('shop.apiurls', namespace='shopapi')),
-    
     path('', include('shop.urls', namespace='shop')),
+
+
+    path('api/rest-auth/', include('dj_rest_auth.urls')),
+    path('api/rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/rest-auth/password/reset/confirm/<uid64>/<token>/', PasswordResetConfirmView.as_view()),
     
 ]
