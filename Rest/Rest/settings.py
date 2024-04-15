@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'allauth',
     'dj_rest_auth',
+    'django_filters',
 ]
 
 REST_AUTH = {
@@ -77,6 +78,7 @@ REST_FRAMEWORK = {
     #OAUTH 
 
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS ': 'rest_framework.pagination.PageNumberPagination',# page #
     # 'rest_framework.pagination.LimitOffsetPagination', #offset 100 vount20
     'PAGE_SIZE': 9,

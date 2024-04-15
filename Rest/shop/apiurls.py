@@ -6,6 +6,7 @@ app_name = 'shopapi'
 
 
 router = routers.SimpleRouter()
+# router.register('shop', ProductListAPIView)
 
 urlpatterns = [
     path('', include(router.urls)),

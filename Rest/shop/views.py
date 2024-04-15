@@ -28,6 +28,8 @@ import uuid
 import os
 from .permissions import *
 from datetime import datetime
+from rest_framework import filters
+from .filters import *
 User = get_user_model()
 
 class ProductList(ListView):
@@ -41,23 +43,39 @@ class ProductDetail(DetailView):
         )
 
 
-# class ProductListAPIView(APIView):
+# class ProductListAPIView(APIView):  # custom api
 #     permission_classes = [IsAdminUser, IsAuthorOrReadOnly]
 #     def get(self, request, format=None, *args, **kwargs): 
 #         product = Product.objects.all()
 #         s = serializers.ProductSerializer(product, many=True)
 #         return Response(s.data)
+# User = get_user_model()
+
+# from rest_framework import serializers as s
 
 class ProductListAPIView(ListCreateAPIView):
     def get_queryset(self):
         return Product.objects.all()   
+
+    # User = s.PrimaryKeyRelatedField(many=True, read_only=True)
     serializer_class = serializers.ProductSerializer
     permission_classes = (IsStaffOrReadOnly,)
+    filterset_fields = [ 'name', 'user', 'color' ]  # create a box with these as its feilds
+    ordering = ['status'] # default ordering
+    # filter_backends = [filters.SearchFilter]
+    # search_fields = ['name', 'description'] # create a search box
+    # filter_backends = [filters.OrderingFilter]
+    # ordering_fields = ['name', 'description']
+    # filter_backends = [IsOwnerFilterBackend]
+
+    
 
 class ProductDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.filter(status='availble')
     serializer_class = serializers.ProductSerializer
     permission_classes = (IsAuthorOrReadOnly, IsAuthenticatedOrReadOnly)
+    filter_backends = [IsOwnerFilterBackend]
+
 
 
 class UsersListAPIView(ListCreateAPIView):

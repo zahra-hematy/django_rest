@@ -3,13 +3,17 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from .models import *
 
+User = get_user_model()
 
+from rest_framework import serializers 
 
 
 class ProductSerializer(ModelSerializer):
+    User =  serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
     class Meta:
         model = Product
-        exclude = ['id', 'user']
+        exclude = ['id']
 
 class UploadProductSerializer(ModelSerializer):
     class Meta:
