@@ -22,6 +22,7 @@ def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'user_{0}/{1}'.format(instance.user.id, filename)
 # from sorl.thumbnail import ImageField, get_thumbnail
+
 def get_covert_path(obj, fn):
     ex = os.path.splitext(fn)[1]
     uid = uuid.uuid5(uuid.NAMESPACE_URL,f"store-book-{obj.pk}" )

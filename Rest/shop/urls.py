@@ -10,6 +10,7 @@ app_name = 'shop'
 urlpatterns = [
    
    path('', ProductList.as_view(), name='shop_list'),
+   path('create/', update.as_view(), name='up'),
    path('<int:pk>', ProductDetail.as_view(), name='shop_detail'),
     
 ] 

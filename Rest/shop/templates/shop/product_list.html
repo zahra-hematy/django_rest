@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load tz %}
 
-
 {% block main %} 
 {% for book in object_list %}
 <section class="py-5">
@@ -11,7 +10,7 @@
         <div class="col mb-5">
             <div class="card h-100">
                 <!-- Product image-->
-                <img class="card-img-top"  src={{ book.imgs.url }}  />
+                <img class="card-img-top"  src="{{ book.imgs.urls }}">
                 <!-- Product details-->
                 <div class="card-body p-4">
                     <div class="text-center">

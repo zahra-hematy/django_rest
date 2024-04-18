@@ -1,0 +1,10 @@
+
+{% load crispy_forms_tags %} 
+<h2 dir='rtl'> افزودن محصول</h2>
+<form method="post" enctype="multipart/form-data" dir='rtl'  >
+  <br/>
+  {% csrf_token %}
+  {{ form.as_p}}
+  <br/>
+  <button dir='rtl' type="submit">ارسال</button>
+</form>

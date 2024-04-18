@@ -21,7 +21,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.models import Permission
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
-from django.views.generic import ListView, DetailView, DeleteView, RedirectView
+from django.views.generic import ListView, DetailView, DeleteView, RedirectView, UpdateView, CreateView
 from django.contrib.auth import get_user_model
 from django_resized import ResizedImageField
 import uuid 
@@ -30,6 +30,7 @@ from .permissions import *
 from datetime import datetime
 from rest_framework import filters
 from .filters import *
+from .forms import ImageForm
 User = get_user_model()
 
 class ProductList(ListView):
@@ -134,3 +135,8 @@ class CommentAPIVeiw(ListAPIView):
 # class SellerAPIView(ModelViewSet):
 #     queryset = User.objects.all()
 #     serializer_class = serializers.SellerSerializer
+
+class update(CreateView):
+    model = Product
+    form_class = ImageForm
+    success_url ="/"
